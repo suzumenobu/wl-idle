@@ -1,0 +1,36 @@
+#+title: Wayland idle daemon
+#+author: suzumenobu
+
+* Table of contents :toc:
+- [[#description][Description]]
+- [[#how-to-use][How to use]]
+- [[#how-to-install][How to install]]
+- [[#how-it-works][How it works]]
+- [[#roadmap][Roadmap]]
+
+* Description
+It creates mark file when your system became idle (e.g. no any incoming input from keyboard & mouse)
+
+* How to use
+Here are available CLI args list
+| Arg            | Value       | Description                                    |
+|----------------+-------------+------------------------------------------------|
+| ~-f~, ~--file~ | ~/tmp/idle~ | Path to mark file that will be created on idle |
+| ~-t~, ~--time~ | ~5~         | Time of inactivity needed to enter idle state  |
+| ~-h~, ~--help~ |             | Shows help message                             |
+
+* How to install
+It requires [[https://www.rust-lang.org/tools/installa][Rust]] to be installed
+#+begin_src bash
+git clone https://github.com/suzumenobu/wl-idle
+cd wl-idle
+cargo install --path .
+#+end_src
+
+* How it works
+With help of wayland *ext_idle_notify_v1* protocol ~wl-idle~ sets notification to be sended after ~time~ and creates ~file~. Also removes it when got any input activity.
+
+* Roadmap
+- Prebuild binaries for linux package managers
+- Time argument handling (seconds and hours)
+- Config file
